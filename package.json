@@ -1,0 +1,19 @@
+{
+  "name": "starterkit",
+  "version": "1.0.0",
+  "description": "HTML, SASS starterkit",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel src/index.html -p 3000",
+    "clean": "rm -rf dist/*",
+    "build:parcel": "parcel build --public-url ./ src/index.html",
+    "build": "npm run clean && npm run build:parcel"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "node-sass": "^5.0.0",
+    "parcel-bundler": "^1.12.5"
+  }
+}

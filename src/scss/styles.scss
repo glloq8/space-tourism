@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  height: 100%
+}
+body {
+  background: burlywood;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+h1 {
+  font-size: 10em;
+}
