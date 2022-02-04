@@ -1,0 +1,69 @@
+//
+// mixins
+// --------------------------------------------------
+
+/* Fonction toute prête pour gérer Rem et Pixel en fonction des supports des navigateurs. */
+@mixin font-size($sizeValue: 1.6) {
+  font-size: ($sizeValue * 10) + px;
+  font-size: $sizeValue + rem;
+}
+
+// Espacement
+$space: 8px;
+$gap : 8px;
+
+:root {
+    --gap: #{$gap}; //Variable CSS
+}
+@function space($i) {
+    @return calc(var(--gap) * #{$i});
+}
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+  @return $number;
+}
+
+// Font face
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
+  $src: null;
+
+  $extmods: (
+      eot: "?",
+      svg: "#" + str_replace($name, " ", "_")
+  );
+
+  $formats: (
+      otf: "opentype",
+      ttf: "truetype"
+  );
+
+  @each $ext in $exts {
+      $extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+      $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+      $src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+  }
+
+  @font-face {
+      font-family: quote($name);
+      font-style: $style;
+      font-weight: $weight;
+      src: $src
+  }
+}
+
+// Responsive
+@mixin up($size) {
+  $size: strip-unit($size);
+  @media (min-width: $size * 1px) { @content; }
+}
+@mixin down($size) {
+  $size: strip-unit($size);
+  @media (max-width: $size * 1px) { @content; }
+}
+@mixin between($down, $up) {
+  $down: strip-unit($down);
+  $up: strip-unit($up);
+  @media (min-width: $down * 1px) and (max-width: $up * 1px) { @content; }
+}

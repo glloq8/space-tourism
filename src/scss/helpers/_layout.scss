@@ -1,0 +1,40 @@
+// Conteneur
+// ==================
+:root {
+    --container-padding: 20px;
+    --container-width: calc(100vw - var(--container-padding) * 2);
+}
+
+%container,
+.container {
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    padding-left: calc(50% - var(--container-width) / 2);
+    padding-right: calc(50% - var(--container-width) / 2);
+}
+
+.container-full {
+    box-sizing: border-box;
+    width: 100%;
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+}
+%container-margin,
+.container-margin {
+  margin-left: auto;
+  margin-right: auto;
+  width: var(--container-width);
+}
+
+.container-narrow {
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media only screen and (min-width: 1025px) {
+  :root {
+    --container-width: 1110px;
+  }
+}
